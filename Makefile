@@ -108,7 +108,7 @@ endif
 
 
 #KERNELVERSION_X86 := 	$(shell uname -r)
-KERNELDIR ?= /media/rob/a72581e8-3ca3-4dc1-b3b8-6db5464de098/Miku/kernel_96b_4.14/kernel
+KERNELDIR ?= /media/rob/a72581e8-3ca3-4dc1-b3b8-6db5464de098/kernel_new/kernel
 LD += -S
 
 INSTALLDIR=./build
