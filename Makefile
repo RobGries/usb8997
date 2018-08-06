@@ -216,6 +216,11 @@ endif
 
 ifneq ($(KERNELRELEASE),)
 
+CONFIG_STA_WEXT=y
+# Enable WEXT for uAP
+CONFIG_UAP_WEXT=y
+
+
 ifeq ($(CONFIG_WIRELESS_EXT),y)
 ifeq ($(CONFIG_WEXT_PRIV),y)
 	# Enable WEXT for STA
