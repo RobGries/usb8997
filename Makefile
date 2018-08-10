@@ -109,6 +109,9 @@ endif
 
 #KERNELVERSION_X86 := 	$(shell uname -r)
 KERNELDIR ?= /media/rob/a72581e8-3ca3-4dc1-b3b8-6db5464de098/qc_36900/build/tmp-glibc/work-shared/dragonboard-410c/kernel-source
+
+##/media/rob/a72581e8-3ca3-4dc1-b3b8-6db5464de098/Miku/kernel_96b_4.14/kernel
+
 LD += -S
 
 INSTALLDIR=./build
@@ -216,15 +219,72 @@ endif
 
 ifneq ($(KERNELRELEASE),)
 
-CONFIG_STA_WEXT=y
-# Enable WEXT for uAP
-CONFIG_UAP_WEXT=y
+ifeq ($(CONFIG_WIRELESS_EXT),y)
+ifeq ($(CONFIG_WEXT_PRIV),y)
+	# Enable WEXT for STA
+	CONFIG_STA_WEXT=y
+	# Enable WEXT for uAP
+	CONFIG_UAP_WEXT=y
+else
+# Disable WEXT for STA
+	CONFIG_STA_WEXT=n
+# Disable WEXT for uAP
+	CONFIG_UAP_WEXT=n
+endif
+endif
 
-CONFIG_STA_CFG80211=n
-CONFIG_UAP_CFG80211=n
+# Enable CFG80211 for STA
+ifeq ($(CONFIG_CFG80211),y)
+	CONFIG_STA_CFG80211=y
+else
+ifeq ($(CONFIG_CFG80211),m)
+	CONFIG_STA_CFG80211=y
+else
+	CONFIG_STA_CFG80211=n
+endif
+endif
 
-EXTRA_CFLAGS += -DSTA_WEXT
-EXTRA_CFLAGS += -DSTA_CFG80211
+# Enable CFG80211 for uAP
+ifeq ($(CONFIG_CFG80211),y)
+	CONFIG_UAP_CFG80211=y
+else
+ifeq ($(CONFIG_CFG80211),m)
+	CONFIG_UAP_CFG80211=y
+else
+	CONFIG_UAP_CFG80211=n
+endif
+endif
+
+ifneq ($(CONFIG_STA_SUPPORT),y)
+	CONFIG_WIFI_DIRECT_SUPPORT=n
+	CONFIG_WIFI_DISPLAY_SUPPORT=n
+	CONFIG_STA_WEXT=n
+	CONFIG_STA_CFG80211=n
+endif
+
+ifneq ($(CONFIG_UAP_SUPPORT),y)
+	CONFIG_WIFI_DIRECT_SUPPORT=n
+	CONFIG_WIFI_DISPLAY_SUPPORT=n
+	CONFIG_UAP_WEXT=n
+	CONFIG_UAP_CFG80211=n
+endif
+
+ifeq ($(CONFIG_STA_SUPPORT),y)
+ifeq ($(CONFIG_STA_WEXT),y)
+	EXTRA_CFLAGS += -DSTA_WEXT
+endif
+ifeq ($(CONFIG_STA_CFG80211),y)
+	EXTRA_CFLAGS += -DSTA_CFG80211
+endif
+endif
+ifeq ($(CONFIG_UAP_SUPPORT),y)
+ifeq ($(CONFIG_UAP_WEXT),y)
+	EXTRA_CFLAGS += -DUAP_WEXT
+endif
+ifeq ($(CONFIG_UAP_CFG80211),y)
+	EXTRA_CFLAGS += -DUAP_CFG80211
+endif
+endif
 
 print:
 ifeq ($(CONFIG_STA_SUPPORT),y)
@@ -520,3 +580,4 @@ endif
 endif
 
 # End of file
+
