@@ -660,6 +660,13 @@ wlan_ops_sta_process_event(IN t_void *priv)
 			wlan_le16_to_cpu(*(t_u16 *)
 					 (pmbuf->pbuf + pmbuf->data_offset +
 					  sizeof(eventcause)));
+
+		if (reason_code == 0x10) {
+			PRINTM(MMSG, "Frequent Disconnect reason squelched (reason 0x%x)\n", reason_code);
+			break;			
+		}
+
+
 		PRINTM(MMSG, "wlan: EVENT: Deauthenticated (reason 0x%x)\n",
 		       reason_code);
 		pmadapter->dbg.num_event_deauth++;
