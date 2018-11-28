@@ -7225,6 +7225,10 @@ woal_cfg80211_init_wiphy(moal_private *priv, t_u8 wait_option)
 	woal_cfg80211_setup_ht_cap(&wiphy->bands[IEEE80211_BAND_2GHZ]->ht_cap,
 				   hw_dev_cap,
 				   cfg_11n->param.supported_mcs_set);
+	/* GOOD LUCK */
+	woal_cfg80211_setup_vht_cap(priv,
+				    &wiphy->bands[IEEE80211_BAND_2GHZ]->
+				    vht_cap);
 	/* For 2.4G band only card, this shouldn't be set */
 	if (wiphy->bands[IEEE80211_BAND_5GHZ]) {
 		woal_cfg80211_setup_ht_cap(&wiphy->bands[IEEE80211_BAND_5GHZ]->
