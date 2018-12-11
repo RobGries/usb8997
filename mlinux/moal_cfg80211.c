@@ -3490,7 +3490,7 @@ woal_cfg80211_setup_ht_cap(struct ieee80211_sta_ht_cap *ht_info,
 
 	ht_info->ht_supported = true;
 	ht_info->ampdu_factor = 0x3;
-	ht_info->ampdu_density = 0x6;
+	ht_info->ampdu_density = 0x5;
 
 	memset(&ht_info->mcs, 0, sizeof(ht_info->mcs));
 	ht_info->cap = 0;
