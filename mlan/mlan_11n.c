@@ -2756,7 +2756,10 @@ wlan_11n_cfg_ioctl(IN pmlan_adapter pmadapter, IN pmlan_ioctl_req pioctl_req)
 		status = wlan_11n_ioctl_addba_param(pmadapter, pioctl_req);
 		break;
 	case MLAN_OID_11N_CFG_DELBA:
+		printk(KERN_DEBUG "Behold Delba ioctl configuration invocation"); 
 		status = wlan_11n_ioctl_delba(pmadapter, pioctl_req);
+		printk(KERN_DEBUG "Behold Delba ioctl status: ", status);
+		printk(KERN_DEBUG "Behold Delba ioctl cfg state: ", cfg);
 		break;
 	case MLAN_OID_11N_CFG_REJECT_ADDBA_REQ:
 		status = wlan_11n_ioctl_rejectaddbareq(pmadapter, pioctl_req);
