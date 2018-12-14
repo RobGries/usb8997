@@ -3490,7 +3490,7 @@ woal_cfg80211_setup_ht_cap(struct ieee80211_sta_ht_cap *ht_info,
 
 	ht_info->ht_supported = true;
 	ht_info->ampdu_factor = 0x3;
-	ht_info->ampdu_density = 0;
+	ht_info->ampdu_density = 0x5;
 
 	memset(&ht_info->mcs, 0, sizeof(ht_info->mcs));
 	ht_info->cap = 0;
@@ -3556,7 +3556,7 @@ woal_cfg80211_setup_vht_cap(moal_private *priv,
 	cfg_11ac->sub_command = MLAN_OID_11AC_VHT_CFG;
 	req->req_id = MLAN_IOCTL_11AC_CFG;
 	req->action = MLAN_ACT_GET;
-	cfg_11ac->param.vht_cfg.band = 3;
+	cfg_11ac->param.vht_cfg.band = 1;
 	cfg_11ac->param.vht_cfg.txrx = MLAN_RADIO_RX;
 	status = woal_request_ioctl(priv, req, MOAL_CMD_WAIT);
 	if (MLAN_STATUS_SUCCESS != status) {
