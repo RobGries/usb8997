@@ -12474,6 +12474,7 @@ done:
 int
 woal_android_priv_cmd(struct net_device *dev, struct ifreq *req)
 {
+	PRINTK(KERN_DEBUG "Behold we somehow ended up running woal_androidpriv_cmd");
 	int ret = 0;
 	android_wifi_priv_cmd priv_cmd;
 	moal_private *priv = (moal_private *)netdev_priv(dev);
@@ -12603,12 +12604,12 @@ woal_android_priv_cmd(struct net_device *dev, struct ifreq *req)
 			len = woal_setget_priv_addbareject(priv, buf,
 							   priv_cmd.total_len);
 			goto handled;
-		} else if (strnicmp
-			   (buf + strlen(CMD_MARVELL), PRIV_CMD_DELBA,
-			    strlen(PRIV_CMD_DELBA)) == 0) {
-			/* Delete selective BA based on parameters */
-			len = woal_priv_delba(priv, buf, priv_cmd.total_len);
-			goto handled;
+//		} else if (strnicmp
+//			   (buf + strlen(CMD_MARVELL), PRIV_CMD_DELBA,
+//			    strlen(PRIV_CMD_DELBA)) == 0) {
+//			/* Delete selective BA based on parameters */
+//			len = woal_priv_delba(priv, buf, priv_cmd.total_len);
+//			goto handled; 
 		} else if (strnicmp
 			   (buf + strlen(CMD_MARVELL), PRIV_CMD_REJECTADDBAREQ,
 			    strlen(PRIV_CMD_REJECTADDBAREQ)) == 0) {
