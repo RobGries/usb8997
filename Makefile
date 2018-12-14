@@ -51,7 +51,7 @@ CONFIG_WIFI_DIRECT_SUPPORT=n
 CONFIG_WIFI_DISPLAY_SUPPORT=n
 
 # Re-association in driver
-CONFIG_REASSOCIATION=y
+CONFIG_REASSOCIATION=n
 
 
 # Manufacturing firmware support
