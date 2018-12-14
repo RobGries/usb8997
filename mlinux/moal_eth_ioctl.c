@@ -12474,7 +12474,7 @@ done:
 int
 woal_android_priv_cmd(struct net_device *dev, struct ifreq *req)
 {
-	PRINTK(KERN_DEBUG "Behold we somehow ended up running woal_androidpriv_cmd");
+	printk(KERN_DEBUG "Behold we somehow ended up running woal_androidpriv_cmd");
 	int ret = 0;
 	android_wifi_priv_cmd priv_cmd;
 	moal_private *priv = (moal_private *)netdev_priv(dev);
