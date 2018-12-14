@@ -37,6 +37,7 @@ Change log:
 #include "mlan_wmm.h"
 #include "mlan_11n.h"
 #include "mlan_11ac.h"
+#include "linux/printk.h"
 /********************************************************
 			Local Variables
 ********************************************************/

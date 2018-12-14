@@ -38,6 +38,7 @@ Change log:
 #include    "moal_uap.h"
 #endif
 #include    "moal_usb.h"
+#include     "linux/printk.h"
 /********************************************************
 			Local Variables
 ********************************************************/
